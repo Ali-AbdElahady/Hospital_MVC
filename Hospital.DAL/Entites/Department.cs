@@ -10,8 +10,9 @@ namespace Hospital.DAL.Entites
     public class Department : BaseEntity
     {
         public string Department_Name { get; set; }
-        [ForeignKey(nameof(Hospital))]
-        public string? Hospital_ID { get;}
-        public HospitalEntity? Hospital { get; set; }
+        public int Hospital_ID { get; } // Foreign Key
+        public HospitalEntity Hospital { get; set; } // Navigation Property
+        public ICollection<Doctor> Doctors { get; set; } = new HashSet<Doctor>(); // One-to-Many Relationship
+        public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();  // One-to-Many Relationship
     }
 }

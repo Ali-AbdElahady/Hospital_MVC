@@ -15,6 +15,6 @@ namespace Hospital.DAL.Entites
         public string? Hospital_Phone_Number { get; set; }
         public string? State { get; set; }
         public string? Zip_Code { get; set; }
-        public List<Department> Department { get; set; }
+        public ICollection<Department> Departments { get; set; } = new HashSet<Department>(); // One-to-Many Relationship
     }
 }

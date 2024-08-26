@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Hospital.DAL.Configurations
 {
-    internal class DepartmentConfiguration : IEntityTypeConfiguration<Department>
+    internal class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
     {
-        public void Configure(EntityTypeBuilder<Department> builder)
+        public void Configure(EntityTypeBuilder<Doctor> builder)
         {
-            builder.HasOne(d => d.Hospital).WithMany(h => h.Departments).HasForeignKey(d=>d.Hospital_ID);
+            builder.HasOne(d => d.Department).WithMany(d=>d.Doctors).HasForeignKey(d=>d.Department_ID);
         }
     }
 }
