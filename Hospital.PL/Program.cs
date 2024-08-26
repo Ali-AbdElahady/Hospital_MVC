@@ -1,4 +1,7 @@
+using Hospital.BLL.Interfaces;
+using Hospital.BLL.Repositories;
 using Hospital.DAL.Context;
+using Hospital.PL.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.PL
@@ -15,6 +18,9 @@ namespace Hospital.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddApplicationServices();
+
+
 
             var app = builder.Build();
 
