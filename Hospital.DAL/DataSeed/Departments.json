@@ -1,0 +1,42 @@
+[
+  {
+    "Department_Name": "Accident",
+    "Hospital_ID": 1
+  },
+  {
+    "Department_Name": "General Surgery",
+    "Hospital_ID": 2
+  },
+  {
+    "Department_Name": "Emergency",
+    "Hospital_ID": 1
+  },
+  {
+    "Department_Name": "Anesthetic",
+    "Hospital_ID": 3
+  },
+  {
+    "Department_Name": "Breast Screening",
+    "Hospital_ID": 4
+  },
+  {
+    "Department_Name": "Gynecology",
+    "Hospital_ID": 5
+  },
+  {
+    "Department_Name": "General Services",
+    "Hospital_ID": 5
+  },
+  {
+    "Department_Name": "Discharge Launge",
+    "Hospital_ID": 3
+  },
+  {
+    "Department_Name": "Neurology",
+    "Hospital_ID": 4
+  },
+  {
+    "Department_Name": "Radiology",
+    "Hospital_ID": 2
+  }
+]

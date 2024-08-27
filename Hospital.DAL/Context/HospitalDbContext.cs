@@ -29,5 +29,6 @@ namespace Hospital.DAL.Context
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
     }
 }

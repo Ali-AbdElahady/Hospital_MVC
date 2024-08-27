@@ -1,0 +1,62 @@
+[
+  {
+    "RoomNumber": 100,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 101,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 102,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 103,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 104,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 105,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 106,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 107,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 108,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  },
+  {
+    "RoomNumber": 109,
+    "Patient_ID": null,
+    "Staff_ID": null,
+    "Admission_Date": null
+  }
+]

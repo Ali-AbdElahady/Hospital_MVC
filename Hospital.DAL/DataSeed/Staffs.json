@@ -1,0 +1,72 @@
+[
+  {
+    "Staff_FName": "Troy",
+    "Staff_LName": "Jackson",
+    "Staff_Address": "3925 N Elm St, Denton, Texas, 76207",
+    "Staff_Phone_Number": "495-994-2863",
+    "Department_ID": 1
+  },
+  {
+    "Staff_FName": "Salim",
+    "Staff_LName": "Ahmed",
+    "Staff_Address": "2212 Carollina St, Plano, Texas, 75101",
+    "Staff_Phone_Number": "638-235-9900",
+    "Department_ID": 2
+  },
+  {
+    "Staff_FName": "Destini",
+    "Staff_LName": "Smith",
+    "Staff_Address": "22 N Pick St, New York, New York, 32556",
+    "Staff_Phone_Number": "560-245-2948",
+    "Department_ID": 3
+  },
+  {
+    "Staff_FName": "Umang",
+    "Staff_LName": "Gohil",
+    "Staff_Address": "706 WildWood Circle, Valdosta, Georgia, 33879",
+    "Staff_Phone_Number": "706-455-3982",
+    "Department_ID": 4
+  },
+  {
+    "Staff_FName": "Jenil",
+    "Staff_LName": "Peterson",
+    "Staff_Address": "1155 RedBud Road, Calhoun, Georgia, 33852",
+    "Staff_Phone_Number": "288-946-2776",
+    "Department_ID": 5
+  },
+  {
+    "Staff_FName": "Zen",
+    "Staff_LName": "Ravel",
+    "Staff_Address": "499 University Dr, Memphis, Tennessee, 83763",
+    "Staff_Phone_Number": "931-252-9880",
+    "Department_ID": 1
+  },
+  {
+    "Staff_FName": "Sarah",
+    "Staff_LName": "Milwauki",
+    "Staff_Address": "100 Zoomba Ave, Chicago, Illinois, 65325",
+    "Staff_Phone_Number": "572-009-5177",
+    "Department_ID": 2
+  },
+  {
+    "Staff_FName": "Akshat",
+    "Staff_LName": "Babbar",
+    "Staff_Address": "299 N Franklin St, Richardson, Texas, 76269",
+    "Staff_Phone_Number": "495-446-9863",
+    "Department_ID": 3
+  },
+  {
+    "Staff_FName": "Ashley",
+    "Staff_LName": "Marcous",
+    "Staff_Address": "25 E 15th St, London, Tennessee, 63888",
+    "Staff_Phone_Number": "638-000-9265",
+    "Department_ID": 4
+  },
+  {
+    "Staff_FName": "Zill",
+    "Staff_LName": "Andre",
+    "Staff_Address": "38 N Palmor St, Denton, Texas, 76207",
+    "Staff_Phone_Number": "495-344-8666",
+    "Department_ID": 5
+  }
+]
