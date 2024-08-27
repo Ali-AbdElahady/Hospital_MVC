@@ -14,7 +14,7 @@ namespace Hospital.DAL.Configurations
         public void Configure(EntityTypeBuilder<Room> builder)
         {
             builder.HasOne(r => r.Staff).WithMany(s => s.AssignedRooms).HasForeignKey(r=>r.Staff_ID).IsRequired(false);
-            builder.Property(r => r.Admission_Date).HasColumnType("date");
+            builder.Property(r => r.Admission_Date).HasColumnType("date").IsRequired(false);
         }
     }
 }

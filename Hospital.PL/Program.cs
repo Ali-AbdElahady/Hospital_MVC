@@ -8,7 +8,7 @@ namespace Hospital.PL
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +23,27 @@ namespace Hospital.PL
 
 
             var app = builder.Build();
+
+            #region seeding data and update migration
+            // Ask CLR For Creating Object From DbContext Explicitly
+            using var Scope = app.Services.CreateScope();
+            // Group Of Services LifeTime Scoped
+            var Services = Scope.ServiceProvider;
+            var LoggerFactory = Services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                var dbContext = Services.GetRequiredService<HospitalDbContext>();
+                await dbContext.Database.MigrateAsync();
+
+                await HospitalContextSeed.SeedAsync(dbContext);
+
+            }
+            catch (Exception ex)
+            {
+                var Logger = LoggerFactory.CreateLogger<Program>();
+                Logger.LogError(ex, "An Error Occured During Appling The Migration");
+            }
+            #endregion
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

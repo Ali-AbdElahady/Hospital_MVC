@@ -4,6 +4,7 @@ using Hospital.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital.DAL.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240827092710_addMedicineTable")]
+    partial class addMedicineTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,7 +183,7 @@ namespace Hospital.DAL.Migrations
 
                     b.HasIndex("Prescription_ID");
 
-                    b.ToTable("Medicines");
+                    b.ToTable("Medicine");
                 });
 
             modelBuilder.Entity("Hospital.DAL.Entites.Patient", b =>
@@ -271,7 +273,7 @@ namespace Hospital.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("Admission_Date")
+                    b.Property<DateTime>("Admission_Date")
                         .HasColumnType("date");
 
                     b.Property<int?>("Patient_ID")

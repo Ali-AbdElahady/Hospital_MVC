@@ -12,7 +12,7 @@ namespace Hospital.DAL.Entites
     {
         [Required]
         public int RoomNumber { get; set; }
-        public DateTime Admission_Date { get; set; }
+        public DateTime? Admission_Date { get; set; }
         public int? Patient_ID { get; set; } // Optional
         public Patient Patient { get; set; }
         public int? Staff_ID { get; set; }
