@@ -19,7 +19,7 @@ namespace Hospital.PL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddApplicationServices();
-
+            builder.Services.AddIdentityServices(builder.Configuration);
 
 
             var app = builder.Build();
@@ -37,6 +37,7 @@ namespace Hospital.PL
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
