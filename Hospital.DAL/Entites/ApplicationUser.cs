@@ -12,11 +12,11 @@ namespace Hospital.DAL.Entites
         public string FName { get; set; }
         public string LName { get; set; }
         public string? Address { get; set; }
-        public int Specialization_ID { get; set; } //  Foreign Key of Specialization for Doctor
+        public int? Specialization_ID { get; set; } //  Foreign Key of Specialization for Doctor
         public Specialization Specialization { get; set; } // Navigational Property
-        public int Department_ID { get; set; } // Foreign Key of Department for Staff And Doctor
+        public int? Department_ID { get; set; } // Foreign Key of Department for Staff And Doctor
         public Department Department { get; set; } // Navigational Property
-        public int Pharmacy_ID  { get; set; } // Foreign Key of Pharmacy for patient
+        public int? Pharmacy_ID  { get; set; } // Foreign Key of Pharmacy for patient
         public Pharmacy Pharmacy { get; set; } // Navigational Property
         public ICollection<Appointment> Appointments_Doctor { get; set; } = new List<Appointment>(); // One-to-Many Relationship
         public ICollection<Appointment> Appointments_Patient { get; set; } = new HashSet<Appointment>(); // One-to-Many Relationship

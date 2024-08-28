@@ -1,5 +1,6 @@
 ﻿using Hospital.DAL.Context;
 using Hospital.DAL.Entites;
+using Hospital.PL.Utlities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
@@ -24,28 +25,28 @@ namespace Hospital.PL.Utilities
         
         public async Task Initialize()
 		{
-			if (await _roleManager.RoleExistsAsync(WebSiteRoles.WebSite_Admin))
+			if (!await _roleManager.RoleExistsAsync(WebSiteRoles.WebSite_Admin))
 			{
-			 //	await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Admin));
-				//await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Doctor));
-				//await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Staff));
-    //            await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Patient));
+                await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Admin));
+                await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Doctor));
+                await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Staff));
+                await _roleManager.CreateAsync(new IdentityRole(WebSiteRoles.WebSite_Patient));
 
-				await _userManager.CreateAsync(new ApplicationUser()
-				{
+                await _userManager.CreateAsync(new ApplicationUser()
+                {
                     FName = "Ali",
                     LName = "Ahmed",
-					UserName = "Dc_ALi",
-					Email = "Dc_ALi@gmail.com"
-				}, "Ali@123");
+                    UserName = "Dc_ALi",
+                    Email = "Dc_ALi@gmail.com",
+                }, "Ali@123");
                 //var AdminUser = _dbContext.ApplicationUsers.FirstOrDefault(x => x.Email == "Dc_ALi@gmail.com");
                 var AdminUser = await _userManager.FindByEmailAsync("Dc_ALi@gmail.com");
 
                 if (AdminUser != null)
-				{
-					await _userManager.AddToRoleAsync(AdminUser, WebSiteRoles.WebSite_Admin);
-				}
-                if (!_userManager.Users.Any())
+                {
+                    await _userManager.AddToRoleAsync(AdminUser, WebSiteRoles.WebSite_Admin);
+                }
+                if (_userManager.Users.Count() == 1 )
                 {
                     var DoctorsData = File.ReadAllText("../Hospital.DAL/DataSeed/Doctors.json");
                     var Doctors = JsonSerializer.Deserialize<List<ApplicationUser>>(DoctorsData);
@@ -59,19 +60,19 @@ namespace Hospital.PL.Utilities
                                 FName = Doctor.FName,
                                 LName = Doctor.LName,
                                 Email = Doctor.Email,
-                                UserName = Doctor.UserName,
+                                UserName = UsernameGenerator.GenerateUniqueUsername(Doctor.FName,Doctor.LName),
                                 PhoneNumber = Doctor.PhoneNumber,
                                 Department_ID = Doctor.Department_ID,
                                 Specialization_ID = Doctor.Specialization_ID,
                             };
                             await _userManager.CreateAsync(User, "Pa$$w0rdDoctor");
-                            var DoctorData = _dbContext.ApplicationUsers
-                                .FirstOrDefault(x => x.PhoneNumber == Doctor.PhoneNumber && x.FName == Doctor.FName);
+                            var DoctorData =  _dbContext.ApplicationUsers
+                                .FirstOrDefault(x => x.UserName == User.UserName);
                             await _userManager.AddToRoleAsync(DoctorData, WebSiteRoles.WebSite_Doctor);
                         }
                     }
 
-                    var StaffsData = File.ReadAllText("../Hospital.DAL/DataSeed/Doctors.json");
+                    var StaffsData = File.ReadAllText("../Hospital.DAL/DataSeed/Staffs.json");
                     var Staffs = JsonSerializer.Deserialize<List<ApplicationUser>>(StaffsData);
 
                     if (Staffs?.Count > 0)
@@ -83,13 +84,13 @@ namespace Hospital.PL.Utilities
                                 FName = Staff.FName,
                                 LName = Staff.LName,
                                 Email = Staff.Email,
-                                UserName = Staff.UserName,
+                                UserName = UsernameGenerator.GenerateUniqueUsername(Staff.FName, Staff.LName),
                                 PhoneNumber = Staff.PhoneNumber,
                                 Department_ID = Staff.Department_ID,
                             };
                             await _userManager.CreateAsync(User, "Pa$$w0rdStaff");
                             var DoctorData = _dbContext.ApplicationUsers
-                                .FirstOrDefault(x => x.PhoneNumber == Staff.PhoneNumber && x.FName == Staff.FName);
+                                .FirstOrDefault(x => x.UserName == User.UserName);
                             await _userManager.AddToRoleAsync(DoctorData, WebSiteRoles.WebSite_Staff);
                         }
                     }
