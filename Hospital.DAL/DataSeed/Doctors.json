@@ -1,72 +1,82 @@
 [
   {
-    "Doctor_FName": "Andrew",
-    "Doctor_LName": "Goff",
-    "Doctor_Phone_Number": "660-267-9945",
-    "Doctor_ِAddress": "",
+    "FName": "Andrew",
+    "LName": "Goff",
+    "PhoneNumber": "660-267-9945",
+    "Address": "",
+    "Specialization_ID": 1,
     "Department_ID": 1
   },
   {
-    "Doctor_FName": "Akkul",
-    "Doctor_LName": "Sood",
-    "Doctor_Phone_Number": "861-279-2233",
-    "Doctor_ِAddress": "",
+    "FName": "Akkul",
+    "LName": "Sood",
+    "PhoneNumber": "861-279-2233",
+    "Address": "",
+    "Specialization_ID": 2,
     "Department_ID": 2
   },
   {
-    "Doctor_FName": "Jonnathan",
-    "Doctor_LName": "Shedd",
-    "Doctor_Phone_Number": "931-243-6689",
-    "Doctor_ِAddress": "",
+    "FName": "Jonnathan",
+    "LName": "Shedd",
+    "PhoneNumber": "931-243-6689",
+    "Address": "",
+    "Specialization_ID": 3, 
     "Department_ID": 3
   },
   {
-    "Doctor_FName": "Aman",
-    "Doctor_LName": "Shah",
-    "Doctor_Phone_Number": "496-990-3870",
-    "Doctor_ِAddress": "",
+    "FName": "Aman",
+    "LName": "Shah",
+    "PhoneNumber": "496-990-3870",
+    "Address": "",
+    "Specialization_ID": 4,
     "Department_ID": 4
   },
   {
-    "Doctor_FName": "Braddy",
-    "Doctor_LName": "Fritts",
-    "Doctor_Phone_Number": "660-789-2086",
-    "Doctor_ِAddress": "",
+    "FName": "Braddy",
+    "LName": "Fritts",
+    "PhoneNumber": "660-789-2086",
+    "Address": "",
+    "Specialization_ID": 5,
     "Department_ID": 5
   },
   {
-    "Doctor_FName": "Emily",
-    "Doctor_LName": "Bonnifas",
-    "Doctor_Phone_Number": "940-899-2851",
-    "Doctor_ِAddress": "",
+    "FName": "Emily",
+    "LName": "Bonnifas",
+    "PhoneNumber": "940-899-2851",
+    "Address": "",
+    "Specialization_ID": 6,
     "Department_ID": 1
   },
   {
-    "Doctor_FName": "Mathew",
-    "Doctor_LName": "Jacob",
-    "Doctor_Phone_Number": "",
-    "Doctor_ِAddress": "",
+    "FName": "Mathew",
+    "LName": "Jacob",
+    "PhoneNumber": "",
+    "Address": "",
+    "Specialization_ID": 7,
     "Department_ID": 1
   },
   {
-    "Doctor_FName": "Paula",
-    "Doctor_LName": "McLain",
-    "Doctor_Phone_Number": "792-846-8772",
-    "Doctor_ِAddress": "",
+    "FName": "Paula",
+    "LName": "McLain",
+    "PhoneNumber": "792-846-8772",
+    "Address": "",
+    "Specialization_ID": 8,
     "Department_ID": 3
   },
   {
-    "Doctor_FName": "Caroll",
-    "Doctor_LName": "Spradlin",
-    "Doctor_Phone_Number": "660-542-5299",
-    "Doctor_ِAddress": "",
+    "FName": "Caroll",
+    "LName": "Spradlin",
+    "PhoneNumber": "660-542-5299",
+    "Address": "",
+    "Specialization_ID": 9,
     "Department_ID": 4
   },
   {
-    "Doctor_FName": "Steve",
-    "Doctor_LName": "Rock",
-    "Doctor_Phone_Number": "584-999-3947",
-    "Doctor_ِAddress": "",
+    "FName": "Steve",
+    "LName": "Rock",
+    "PhoneNumber": "584-999-3947",
+    "Address": "",
+    "Specialization_ID": 10,
     "Department_ID": 5
   }
 

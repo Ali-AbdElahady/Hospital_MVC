@@ -13,9 +13,9 @@ namespace Hospital.DAL.Entites
         [Required]
         public int RoomNumber { get; set; }
         public DateTime? Admission_Date { get; set; }
-        public int? Patient_ID { get; set; } // Optional
-        public Patient Patient { get; set; }
-        public int? Staff_ID { get; set; }
-        public Staff Staff { get; set; } // Navigation Property
+        public string? Patient_ID { get; set; } // Optional
+        public ApplicationUser Patient { get; set; } // Navigation Property
+        public string? Staff_ID { get; set; } // Optional
+        public ApplicationUser Staff { get; set; } // Navigation Property
     }
 }

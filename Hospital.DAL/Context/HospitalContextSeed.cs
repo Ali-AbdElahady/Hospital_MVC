@@ -1,4 +1,5 @@
 ﻿using Hospital.DAL.Entites;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,35 +40,6 @@ namespace Hospital.DAL.Context
                     await dbContext.SaveChangesAsync();
                 }
             }
-
-            if (!dbContext.Doctors.Any())
-            {
-                var DoctorsData = File.ReadAllText("../Hospital.DAL/DataSeed/Doctors.json");
-                var Doctors = JsonSerializer.Deserialize<List<Doctor>>(DoctorsData);
-                if (Doctors?.Count > 0)
-                {
-                    foreach (var Doctor in Doctors)
-                    {
-                        await dbContext.Set<Doctor>().AddAsync(Doctor);
-                    }
-                    await dbContext.SaveChangesAsync();
-                }
-            }
-
-            if (!dbContext.Staffs.Any())
-            {
-                var StaffsData = File.ReadAllText("../Hospital.DAL/DataSeed/Staffs.json");
-                var Staffs = JsonSerializer.Deserialize<List<Staff>>(StaffsData);
-                if (Staffs?.Count > 0)
-                {
-                    foreach (var Staff in Staffs)
-                    {
-                        await dbContext.Set<Staff>().AddAsync(Staff);
-                    }
-                    await dbContext.SaveChangesAsync();
-                }
-            }
-
             if (!dbContext.Rooms.Any())
             {
                 var RoomsData = File.ReadAllText("../Hospital.DAL/DataSeed/Rooms.json");
@@ -77,6 +49,19 @@ namespace Hospital.DAL.Context
                     foreach (var Room in Rooms)
                     {
                         await dbContext.Set<Room>().AddAsync(Room);
+                    }
+                    await dbContext.SaveChangesAsync();
+                }
+            }
+            if (!dbContext.Specializations.Any())
+            {
+                var SpecializationsData = File.ReadAllText("../Hospital.DAL/DataSeed/Specializations.json");
+                var Specializations = JsonSerializer.Deserialize<List<Specialization>>(SpecializationsData);
+                if (Specializations?.Count > 0)
+                {
+                    foreach (var Specialization in Specializations)
+                    {
+                        await dbContext.Set<Specialization>().AddAsync(Specialization);
                     }
                     await dbContext.SaveChangesAsync();
                 }

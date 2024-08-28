@@ -1,4 +1,5 @@
 ﻿using Hospital.DAL.Context;
+using Hospital.DAL.Entites;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,12 @@ namespace Hospital.PL.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection Services, IConfiguration Configuration)
         {
             // Configure database context
-            Services.AddDbContext<IdentityDbContext>(options =>
+            Services.AddDbContext<HospitalDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Configure Identity
-            Services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDbContext>()
+            Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<HospitalDbContext>()
                 .AddDefaultTokenProviders();
 
             Services.AddAuthentication(options =>

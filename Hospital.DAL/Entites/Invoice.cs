@@ -10,8 +10,8 @@ namespace Hospital.DAL.Entites
 {
     public class Invoice : BaseEntity
     {
-        public int Patient_ID { get; set; }
-        public Patient Patient { get; set; }
+        public string Patient_ID { get; set; }
+        public ApplicationUser Patient { get; set; }
         public string? Service_Description { get; set; }
         public decimal Cost { get; set; }
         public decimal Total { get; set; }

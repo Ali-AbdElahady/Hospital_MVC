@@ -1,0 +1,54 @@
+[
+  {
+    "Name": "Cardiology",
+    "Description": "Specializes in diagnosing and treating heart-related conditions."
+  },
+  {
+    "Name": "Dermatology",
+    "Description": "Focuses on the treatment of skin, hair, and nail disorders."
+  },
+  {
+    "Name": "Neurology",
+    "Description": "Deals with disorders of the brain and nervous system."
+  },
+  {
+    "Name": "Orthopedics",
+    "Description": "Specializes in conditions involving the musculoskeletal system."
+  },
+  {
+    "Name": "Pediatrics",
+    "Description": "Focuses on the medical care of infants, children, and adolescents."
+  },
+  {
+    "Name": "Radiology",
+    "Description": "Uses imaging techniques to diagnose and treat diseases."
+  },
+  {
+    "Name": "Surgery",
+    "Description": "Involves performing operations to treat or diagnose conditions."
+  },
+  {
+    "Name": "Urology",
+    "Description": "Focuses on the urinary tract and male reproductive system."
+  },
+  {
+    "Name": "Oncology",
+    "Description": "Specializes in diagnosing and treating cancer."
+  },
+  {
+    "Name": "Endocrinology",
+    "Description": "Deals with hormone-related diseases and conditions."
+  },
+  {
+    "Name": "Gastroenterology",
+    "Description": "Focuses on the digestive system and its disorders."
+  },
+  {
+    "Name": "Ophthalmology",
+    "Description": "Specializes in eye and vision care."
+  },
+  {
+    "Name": "Pulmonology",
+    "Description": "Deals with diseases involving the respiratory tract."
+  }
+]

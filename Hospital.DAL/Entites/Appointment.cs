@@ -10,10 +10,10 @@ namespace Hospital.DAL.Entites
 {
     public class Appointment 
     {
-        public int Doctor_ID { get; set; }
-        public Doctor Doctor { get; set; }
-        public int Patient_ID { get; set; }
-        public Patient Patient { get; set; }
+        public string Doctor_ID { get; set; }
+        public ApplicationUser Doctor { get; set; }
+        public string Patient_ID { get; set; }
+        public ApplicationUser Patient { get; set; }
         public DateTime Date { get; set; }
     }
 }

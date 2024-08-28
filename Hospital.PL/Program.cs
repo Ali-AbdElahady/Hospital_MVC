@@ -1,7 +1,10 @@
 using Hospital.BLL.Interfaces;
 using Hospital.BLL.Repositories;
 using Hospital.DAL.Context;
+using Hospital.DAL.Entites;
 using Hospital.PL.Extensions;
+using Hospital.PL.Utilities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.PL
@@ -14,12 +17,9 @@ namespace Hospital.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<HospitalDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddApplicationServices();
+            // Add Extenssions
             builder.Services.AddIdentityServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
 
 
             var app = builder.Build();
@@ -36,6 +36,9 @@ namespace Hospital.PL
                 await dbContext.Database.MigrateAsync();
 
                 await HospitalContextSeed.SeedAsync(dbContext);
+
+                var dbInitial = Services.GetRequiredService<IDbInitializer>();
+                await dbInitial.Initialize();
 
             }
             catch (Exception ex)

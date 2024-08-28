@@ -12,7 +12,6 @@ namespace Hospital.DAL.Entites
         public string Department_Name { get; set; }
         public int Hospital_ID { get; set; } // Foreign Key
         public HospitalEntity Hospital { get; set; } // Navigation Property
-        public ICollection<Doctor> Doctors { get; set; } = new HashSet<Doctor>(); // One-to-Many Relationship
-        public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();  // One-to-Many Relationship
+        public ICollection<ApplicationUser> Employees { get; set; } = new HashSet<ApplicationUser>(); // One-to-Many Relationship
     }
 }

@@ -13,7 +13,7 @@ namespace Hospital.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Prescription> builder)
         {
-            builder.HasOne(p => p.Patient).WithMany(p => p.Prescription).HasForeignKey(p=>p.Patient_ID);
+            builder.HasOne(p => p.Patient).WithMany(p => p.Prescriptions).HasForeignKey(p=>p.Patient_ID);
             builder.Property(p => p.Prescription_Date).HasColumnType("date");
         }
     }

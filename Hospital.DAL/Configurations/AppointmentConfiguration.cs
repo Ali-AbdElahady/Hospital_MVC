@@ -14,10 +14,11 @@ namespace Hospital.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Appointment> builder)
         {
-            builder.HasKey(a => new { a.Doctor_ID, a.Patient_ID });
-            builder.HasOne(a => a.Doctor).WithMany(D => D.Appointments); 
-            builder.HasOne(a => a.Patient).WithMany(P => P.Appointments);
+            builder.HasKey(a => new { a.Doctor_ID, a.Patient_ID }).IsClustered(false); ;
+            builder.HasOne(a => a.Doctor).WithMany(D => D.Appointments_Doctor).OnDelete(DeleteBehavior.Restrict); ; 
+            builder.HasOne(a => a.Patient).WithMany(P => P.Appointments_Patient).OnDelete(DeleteBehavior.Restrict); ;
             builder.Property(a=>a.Date).HasColumnType("date");
+
         }
     }
 }
