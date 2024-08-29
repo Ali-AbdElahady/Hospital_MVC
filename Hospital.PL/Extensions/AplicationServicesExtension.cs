@@ -1,6 +1,8 @@
 ﻿using Hospital.BLL.Interfaces;
 using Hospital.BLL.Repositories;
 using Hospital.PL.Utilities;
+using Hospital.PL.Utlities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Hospital.PL.Extensions
 {
@@ -11,6 +13,8 @@ namespace Hospital.PL.Extensions
             Services.AddScoped(typeof(IDbInitializer), typeof(DbInitializer));
             Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            //Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+
             return Services;
         }
     }

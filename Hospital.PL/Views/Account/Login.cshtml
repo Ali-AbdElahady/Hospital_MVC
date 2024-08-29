@@ -1,0 +1,39 @@
+﻿@using DemoMvcAgain.PL.Models;
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form class="form-detail" asp-action="Login">
+	<h2>Login Account Form</h2>
+	<div class="form-row">
+		@* <label for="Email">Email</label> *@
+		<input asp-for="Email" class="input-text" placeholder="Email">
+		<span class="text-danger" asp-validation-for="Email"></span>
+	</div>
+	<div class="form-row">
+		@* <label for="Password">Password</label> *@
+		<input asp-for="Password" class="input-text" placeholder="Password">
+		<span class="text-danger" asp-validation-for="Password"></span>
+	</div>
+	<div class="form-row">
+		@* <label for="ConfirmPassword">Confirm Password</label> *@
+		<label class="cdflx-checkbox">
+			<input asp-for="RememberMe" type="checkbox"> <span>Remember Me</span>
+		</label>
+	</div>
+	<div class="form-row-last">
+		<input type="submit" class="register" value="Login">
+	</div>
+	<p class="link">Don't have an account? <a asp-action="Register">Sign Up</a></p>
+	<p class="link mt-0"><a asp-action="ForgetPassword">Forget Password</a></p>
+
+</form>
+@section ValidationScriptSection {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+
