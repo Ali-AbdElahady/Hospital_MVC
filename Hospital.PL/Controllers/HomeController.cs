@@ -1,4 +1,5 @@
-﻿using Hospital.PL.Models;
+﻿
+using Hospital.PL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

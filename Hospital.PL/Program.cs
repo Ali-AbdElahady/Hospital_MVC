@@ -14,8 +14,7 @@ namespace Hospital.PL
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-                       
-
+                      
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             // Add Extenssions
