@@ -3,7 +3,8 @@ using Hospital.BLL.Interfaces;
 using Hospital.BLL.Specification;
 using Hospital.DAL.Entites;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Helpers = Hospital.PL.Helpers;
 namespace Hospital.PL.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -24,8 +25,18 @@ namespace Hospital.PL.Areas.Admin.Controllers
         {
             var spec = new HospitalsSpecifications(parms);
             var hospitals = await unitOfWork.GenerateGenericRepo<HospitalEntity>().GetAllWithSpecAsync(spec);
+            var CountSpec = new HospitalsWithFilterationForCountAsync(parms);
+            var Count = await unitOfWork.GenerateGenericRepo<HospitalEntity>().GetCountWithSpecAsync(CountSpec);
+            var pageData = new Helpers.PagedReuslt<HospitalEntity>
+            {
+                Data = (List<HospitalEntity>) hospitals,
+                PageSize = parms.PageSize,
+                TotalItems = Count,
+                PageNumber = parms.pageNumber
+
+            };
             logger.LogInformation($"Retrieved hospitals: {hospitals.Count()} items.");
-            return View(hospitals);
+            return View(pageData);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Hospital.BLL.Specification
             get { return pageSize; }
             set { pageSize = value > 10 ? 10 : value; }
         }
-        public int pageIndex { get; set; } = 1;
+        public int pageNumber { get; set; } = 1;
         private string? search;
         public string? Search
         {

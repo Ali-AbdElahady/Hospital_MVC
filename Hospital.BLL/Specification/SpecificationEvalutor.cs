@@ -28,7 +28,10 @@ namespace DemoMvcAgain.BLL.Specifications
             {
                 query = query.Skip(spec.Skip).Take(spec.Take);
             }
-            query = spec.Includes.Aggregate(query, (current, inclue) => current.Include(inclue));
+            if(spec.Includes != null)
+            {
+                query = spec.Includes.Aggregate(query, (current, inclue) => current.Include(inclue));
+            }
             return query;
         }
     }

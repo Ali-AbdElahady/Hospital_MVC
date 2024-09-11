@@ -1,41 +1,52 @@
-﻿@model IEnumerable<Hospital.DAL.Entites.HospitalEntity>
-
+﻿@model Hospital.PL.Helpers.PagedReuslt<Hospital.DAL.Entites.HospitalEntity>
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Hospitals List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<!-- Search Form -->
+<form asp-action="Index" method="get">
+    <div class="form-group mb-3">
+        <input type="text" name="Search" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search by Name or Address" />
+    </div>
+    <input type="submit" value="Search" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Reset</a>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital_Name)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital_Address)
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital_Phone_Number)
+                Address
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.State)
+                Phone
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zip_Code)
+                State
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Zip Code
             </th>
-            <th></th>
+            <th>Controls</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Data) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Hospital_Name)
             </td>
@@ -52,9 +63,6 @@
                 @Html.DisplayFor(modelItem => item.Zip_Code)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
@@ -63,3 +71,25 @@
 }
     </tbody>
 </table>
+<div>
+    <p>Page Size: @Model.PageSize</p>
+    <p>Page Number: @Model.PageNumber</p>
+    <p>Total Items: @Model.TotalItems</p>
+</div>
+<div>
+
+
+    <cs-pager cs-paging-pagesize="@Model.PageSize"
+              cs-paging-pagenumber="@Model.PageNumber"
+              cs-paging-totalitems="@Model.TotalItems"
+              cs-pagenumber-param="pageNumber"
+              asp-controller="Hospitals"
+              asp-action="Index"
+              cs-pager-li-current-class="page-item active"
+              cs-pager-li-other-class="page-item"
+              cs-pager-li-non-active-class="page-item disabled"
+              cs-pager-link-current-class="page-link"
+              cs-pager-link-other-class="page-link">
+
+    </cs-pager>
+</div>
