@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hospital.BLL.Interfaces
 {
-    public interface IUnitOfWork<T> where T : class
+    public interface IUnitOfWork : IAsyncDisposable
     {
         IGenericRepository<T> GenerateGenericRepo<T>() where T : class;
+        Task<int> CompleteAsync();
     }
 }

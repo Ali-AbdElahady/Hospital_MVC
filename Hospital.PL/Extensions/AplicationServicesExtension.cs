@@ -12,7 +12,7 @@ namespace Hospital.PL.Extensions
         {
             Services.AddScoped(typeof(IDbInitializer), typeof(DbInitializer));
             Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            Services.AddScoped<IUnitOfWork, UnitOfWork>();
             Services.AddScoped(typeof(IEmailSender), typeof(EmailSender));
             //Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.BLL.Repositories
 {
-    public class UnitOfWork<T> : IUnitOfWork<T> where T : class
+    public class UnitOfWork
     {
         private readonly HospitalDbContext _dbContext;
 
