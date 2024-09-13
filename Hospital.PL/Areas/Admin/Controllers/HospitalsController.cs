@@ -38,5 +38,52 @@ namespace Hospital.PL.Areas.Admin.Controllers
             logger.LogInformation($"Retrieved hospitals: {hospitals.Count()} items.");
             return View(pageData);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(HospitalEntity model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model); 
+            }
+
+            await unitOfWork.GenerateGenericRepo<HospitalEntity>().AddAsync(model);
+            await unitOfWork.CompleteAsync(); 
+
+            return RedirectToAction(nameof(Index)); 
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update(HospitalEntity model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+             unitOfWork.GenerateGenericRepo<HospitalEntity>().UpdateAsync(model);
+            await unitOfWork.CompleteAsync(); // Ensure the changes are saved
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var hospital = await unitOfWork.GenerateGenericRepo<HospitalEntity>().GetByIdAsync(id);
+            if (hospital == null)
+            {
+                return NotFound();
+            }
+
+             unitOfWork.GenerateGenericRepo<HospitalEntity>().DeleteAsync(hospital);
+            await unitOfWork.CompleteAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
