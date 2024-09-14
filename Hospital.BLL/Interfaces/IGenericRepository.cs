@@ -12,8 +12,8 @@ namespace Hospital.BLL.Interfaces
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task AddAsync(T entity);
-        void UpdateAsync(T entity);
-        void DeleteAsync(T entity);
+        void Update(T entity);
+        void Delete(T entity);
         Task<T> GetByIdWithSpecAsync(ISpecification<T> spec);
         Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec);
         Task<int> GetCountWithSpecAsync(ISpecification<T> spec);

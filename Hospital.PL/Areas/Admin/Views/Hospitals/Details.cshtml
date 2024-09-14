@@ -1,0 +1,50 @@
+﻿@model Hospital.DAL.Entites.HospitalEntity
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Hospital</h4>
+    <hr />
+        <input type="hidden" asp-for="Id" />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Hospital Name
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Hospital_Name)
+        </dd>
+        <dt class = "col-sm-3">
+            Hospital Address
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Hospital_Address)
+        </dd>
+        <dt class = "col-sm-3">
+            Hospital Phone Number
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Hospital_Phone_Number)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class = "col-sm-3">
+            Zip Code
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Zip_Code)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

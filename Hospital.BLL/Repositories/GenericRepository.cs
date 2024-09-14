@@ -1,6 +1,7 @@
 ﻿using DemoMvcAgain.BLL.Specifications;
 using Hospital.BLL.Interfaces;
 using Hospital.DAL.Context;
+using Hospital.DAL.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.BLL.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         private readonly HospitalDbContext _dbContext;
 
@@ -23,9 +24,9 @@ namespace Hospital.BLL.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
         }
 
-        public void DeleteAsync(T entity)
+        public void Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            _dbContext.Remove(entity);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -40,9 +41,9 @@ namespace Hospital.BLL.Repositories
             return data;
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public  async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<T>().FindAsync(id);
         }
         public async Task<T> GetByIdWithSpecAsync(ISpecification<T> spec)
         {
@@ -54,7 +55,7 @@ namespace Hospital.BLL.Repositories
             return await ApplySpecification(spec).CountAsync();
         }
 
-        public void UpdateAsync(T entity)
+        public void Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
         }

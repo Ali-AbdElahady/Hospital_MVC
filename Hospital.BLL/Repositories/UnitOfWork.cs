@@ -1,5 +1,6 @@
 ﻿using Hospital.BLL.Interfaces;
 using Hospital.DAL.Context;
+using Hospital.DAL.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
@@ -25,7 +26,7 @@ namespace Hospital.BLL.Repositories
 
         public async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
 
-        public IGenericRepository<T> GenerateGenericRepo<T>() where T : class
+        public IGenericRepository<T> GenerateGenericRepo<T>() where T : BaseEntity
         {
             var type = typeof(T).Name; 
             if (!_repositorys.ContainsKey(type))
