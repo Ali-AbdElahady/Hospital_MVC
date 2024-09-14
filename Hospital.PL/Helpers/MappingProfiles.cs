@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Hospital.DAL.Entites;
+using Hospital.PL.Areas.Admin.Models;
 
 namespace Hospital.PL.Helpers
 {
@@ -6,6 +8,11 @@ namespace Hospital.PL.Helpers
     {
         public MappingProfiles()
         {
+            CreateMap<Department,DepartmentVM>()
+                .ForMember(D=>D.Department_Name , O=>O.MapFrom(S=>S.Department_Name))
+                .ForMember(D => D.Hospital_Id, O => O.MapFrom(S => S.Hospital_ID))
+                .ForMember(D => D.Hospital_Name, O => O.MapFrom(S => S.Hospital.Hospital_Name))
+                .ReverseMap();
         }
     }
 }
