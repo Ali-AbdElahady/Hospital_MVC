@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.BLL.Specification
+namespace Hospital.BLL.Specification.DepartmentSpecs
 {
     public class DepartmentsWithFilterationForCountAsync : BaseSpecification<Department>
     {
         public DepartmentsWithFilterationForCountAsync(DepartmentSpecParams Params) : base(D =>
-            (string.IsNullOrEmpty(Params.Search) || D.Department_Name.ToLower().Contains(Params.Search) 
+            string.IsNullOrEmpty(Params.Search) || D.Department_Name.ToLower().Contains(Params.Search)
         &&
-            (!Params.Hospital_Id.HasValue || D.Hospital_ID == Params.Hospital_Id)))
+            (!Params.Hospital_Id.HasValue || D.Hospital_ID == Params.Hospital_Id))
         {
 
         }

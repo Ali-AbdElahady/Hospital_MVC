@@ -1,12 +1,7 @@
 ﻿using DemoMvcAgain.BLL.Specifications;
 using Hospital.DAL.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Hospital.BLL.Specification
+namespace Hospital.BLL.Specification.DepartmentSpecs
 {
     public class DepartmentsSpecifications : BaseSpecification<Department>
     {
@@ -16,7 +11,7 @@ namespace Hospital.BLL.Specification
             (!Params.Hospital_Id.HasValue || D.Hospital_ID == Params.Hospital_Id))
         {
             //Includes.Add(D => D.Hospital);
-            AddIncludes(D=>D.Hospital);
+            AddIncludes(D => D.Hospital);
             if (!string.IsNullOrEmpty(Params.Sort))
             {
                 switch (Params.Sort)

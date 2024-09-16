@@ -14,18 +14,28 @@ namespace Hospital.PL.Areas.Admin.Controllers
     public class EmployeesController : Controller
     {
         private readonly IMapper mapper;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationUser> _roleManager;
 
-        public EmployeesController(IMapper mapper, UserManager<ApplicationUser> userManager)
+        public EmployeesController(IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<ApplicationUser> roleManager)
         {
             this.mapper = mapper;
-            this.userManager = userManager;
+            this._userManager = userManager;
+            this._roleManager = roleManager;
         }
         [Route("")]
         [Route("Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string roleName)
         {
-            var users = await userManager.Users.ToListAsync();
+            if (!await _roleManager.RoleExistsAsync(roleName))
+            {
+                return NotFound($"Role '{roleName}' does not exist.");
+            }
+
+            // Fetch users in the role
+            var usersInRole = await _userManager.GetUsersInRoleAsync(roleName);
+
+            var users = await _userManager.Users.ToListAsync();
             var mappedEmps = mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserVM>>(users);
             return View(mappedEmps);
         }

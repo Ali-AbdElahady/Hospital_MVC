@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hospital.BLL.Interfaces;
 using Hospital.BLL.Specification;
+using Hospital.BLL.Specification.DepartmentSpecs;
 using Hospital.DAL.Entites;
 using Hospital.PL.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;

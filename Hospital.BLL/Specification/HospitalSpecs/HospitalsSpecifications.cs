@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.BLL.Specification
+namespace Hospital.BLL.Specification.HospitalSpecs
 {
     public class HospitalsSpecifications : BaseSpecification<HospitalEntity>
     {
         public HospitalsSpecifications(EntitySpecParams Params) : base(H =>
-            (string.IsNullOrEmpty(Params.Search) || H.Hospital_Name.ToLower().Contains(Params.Search) || H.Hospital_Address.ToLower().Contains(Params.Search)))
+            string.IsNullOrEmpty(Params.Search) || H.Hospital_Name.ToLower().Contains(Params.Search) || H.Hospital_Address.ToLower().Contains(Params.Search))
         {
             if (!string.IsNullOrEmpty(Params.Sort))
             {
@@ -29,7 +29,7 @@ namespace Hospital.BLL.Specification
                 }
 
             }
-                ApplyPagination((Params.pageNumber - 1) * Params.PageSize, Params.PageSize);
+            ApplyPagination((Params.pageNumber - 1) * Params.PageSize, Params.PageSize);
         }
     }
 }
