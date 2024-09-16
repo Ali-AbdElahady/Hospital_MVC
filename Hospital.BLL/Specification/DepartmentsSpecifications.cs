@@ -35,5 +35,9 @@ namespace Hospital.BLL.Specification
             }
             ApplyPagination((Params.pageNumber - 1) * Params.PageSize, Params.PageSize);
         }
+        public DepartmentsSpecifications(int id) : base(D => D.Id == id)
+        {
+            Includes.Add(D => D.Hospital);
+        }
     }
 }

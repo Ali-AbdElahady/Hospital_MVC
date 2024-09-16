@@ -1,0 +1,49 @@
+﻿@using Hospital.DAL.Entites;
+@model Hospital.PL.Areas.Admin.Models.DepartmentVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hospitals = new SelectList(ViewBag.hospitals, "Id", "Hospital_Name");
+}
+
+
+<h1>Create</h1>
+
+<h4>DepartmentVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Department_Name" class="control-label"></label>
+                <input asp-for="Department_Name" class="form-control" required="false" />
+                <span asp-validation-for="Department_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" asp-for="Hospital_Id"></label>
+                <select class="form-control overflow-scroll" asp-items="@hospitals" asp-for="Hospital_Id">
+                    <option value="null">------ Select hospital ------</option>
+                </select>
+            </div>
+            @* <div class="form-group">
+                <input asp-for="Hospital_Name" type="hidden" class="form-control" />
+            </div> *@
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
