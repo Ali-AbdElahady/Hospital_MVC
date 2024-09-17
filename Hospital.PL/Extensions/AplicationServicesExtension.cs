@@ -1,6 +1,7 @@
 ﻿using Hospital.BLL.Interfaces;
 using Hospital.BLL.Repositories;
 using Hospital.PL.Helpers;
+using Hospital.PL.Services;
 using Hospital.PL.Utilities;
 using Hospital.PL.Utlities;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -15,6 +16,7 @@ namespace Hospital.PL.Extensions
             Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             Services.AddScoped(typeof(IEmailSender), typeof(EmailSender));
+            Services.AddScoped(typeof(IUserServices), typeof(UserServices));
             Services.AddAutoMapper(typeof(MappingProfiles));
             //Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 

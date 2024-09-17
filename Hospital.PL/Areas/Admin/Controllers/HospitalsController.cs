@@ -1,12 +1,9 @@
-﻿using DemoMvcAgain.BLL.Specifications;
-using Hospital.BLL.Interfaces;
+﻿using Hospital.BLL.Interfaces;
 using Hospital.BLL.Specification;
+using Hospital.BLL.Specification.HospitalSpecs;
 using Hospital.DAL.Entites;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
-using Helpers = Hospital.PL.Helpers;
 namespace Hospital.PL.Areas.Admin.Controllers
 {
     [Area("Admin")]

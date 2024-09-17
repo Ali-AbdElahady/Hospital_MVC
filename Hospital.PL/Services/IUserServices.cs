@@ -2,8 +2,8 @@
 
 namespace Hospital.PL.Services
 {
-    public class IUserServices
+    public interface IUserServices
     {
-        IEnumerable<ApplicationUser> getAllUsersB
+        Task<IEnumerable<ApplicationUser>> getAllUsersByRole(string roleName, int? departmentId = null, string? searchTerms = null);
     }
 }
