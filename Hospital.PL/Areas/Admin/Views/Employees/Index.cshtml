@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>List of Employees</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -79,18 +79,18 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Specialization_ID)
+                @Html.DisplayFor(modelItem => item.Specialization.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department_ID)
+                @Html.DisplayFor(modelItem => item.Department.Department_Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pharmacy_ID)
+                @Html.DisplayFor(modelItem => item.Pharmacy.Pharmacy_Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Hospital.BLL.Interfaces;
+using Hospital.BLL.Repositories;
 using Hospital.DAL.Entites;
 using Hospital.PL.Areas.Admin.Models;
 using Hospital.PL.Helpers;
@@ -8,7 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System.Data;
 
 namespace Hospital.PL.Areas.Admin.Controllers
@@ -66,5 +69,47 @@ namespace Hospital.PL.Areas.Admin.Controllers
             };
             return View(pageRes);
         }
+
+        [Route("Details")]
+        [HttpGet]
+        public async Task<IActionResult> Details(string? id,string viewName = "Details")
+        {
+            if (id is null) return BadRequest();
+            var emp = await _userServices.getUserById(id);
+            var currentRole = await _userManager.GetRolesAsync(emp);
+            if (emp is null) return NotFound();
+            var mappedEmp = mapper.Map<ApplicationUser, ApplicationUserVM>(emp);
+            mappedEmp.Role = currentRole.FirstOrDefault();
+            return View(viewName, mappedEmp);
+        }
+        [Route("Edit")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(string? id)
+        {
+            var departments = await _unitOfWork.GenerateGenericRepo<Department>().GetAllAsync();
+            var roles = await _roleManager.Roles.ToListAsync();
+            ViewBag.Roles = new SelectList(roles, "Name", "Name");
+            ViewBag.Departments = new SelectList(departments, "Id", "Department_Name");
+            return await Details(id,"Edit");
+        }
+        [Route("Edit")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(ApplicationUserVM emp)
+        {
+            var user = await _userManager.FindByIdAsync(emp.Id);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+            var updateUserResult = await _userServices.updateUser(emp);
+            if (!updateUserResult.Succeeded)
+            {
+                return BadRequest("Failed to update user");
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
