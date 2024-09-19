@@ -2,8 +2,10 @@
 using Hospital.DAL.Context;
 using Hospital.DAL.Entites;
 using Hospital.PL.Areas.Admin.Models;
+using Hospital.PL.Utlities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Hospital.PL.Services
 {
@@ -63,6 +65,17 @@ namespace Hospital.PL.Services
                 }
             }
             return usersWithIncludes;
+        }
+        public async Task<IdentityResult> CreateUser(ApplicationUserVM user)
+        {
+            var result = new IdentityResult();
+            var mappedUser = mapper.Map<ApplicationUserVM, ApplicationUser>(user);
+            mappedUser.UserName = UsernameGenerator.GenerateUniqueUsername(mappedUser.FName, mappedUser.LName);
+            result = await _userManager.CreateAsync(mappedUser, user.Role == "Doctor" ? "Pa$$w0rdDoctor" : "Pa$$w0rdStaff");
+            var userDataData = _dbContext.ApplicationUsers
+                                .FirstOrDefault(x => x.UserName == mappedUser.UserName);
+            await _userManager.AddToRoleAsync(userDataData, user.Role);
+            return result;
         }
         public async Task<ApplicationUser> getUserById(string id)
         {

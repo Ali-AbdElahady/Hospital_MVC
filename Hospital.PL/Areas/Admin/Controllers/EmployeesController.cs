@@ -46,7 +46,7 @@ namespace Hospital.PL.Areas.Admin.Controllers
             var departments = await _unitOfWork.GenerateGenericRepo<Department>().GetAllAsync();
             var roles = await _roleManager.Roles.ToListAsync();
 
-            var FilteredUsers = await _userServices.getAllUsersByRole(param.roleName, param.departmentId,param.Search);
+            var FilteredUsers = await _userServices.getAllUsersByRole(param.roleName, param.departmentId,param.Search,int skip,int take);
             var allUsers = await _userServices.getAllUsersByRole(roleName : param.roleName);
             var count = allUsers.Count();
             //var users = await _userManager.Users.ToListAsync();
@@ -87,9 +87,12 @@ namespace Hospital.PL.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(string? id)
         {
             var departments = await _unitOfWork.GenerateGenericRepo<Department>().GetAllAsync();
+            var Specializations = await _unitOfWork.GenerateGenericRepo<Specialization>().GetAllAsync();
+
             var roles = await _roleManager.Roles.ToListAsync();
             ViewBag.Roles = new SelectList(roles, "Name", "Name");
             ViewBag.Departments = new SelectList(departments, "Id", "Department_Name");
+            ViewBag.Specializations = new SelectList(Specializations, "Id", "Name");
             return await Details(id,"Edit");
         }
         [Route("Edit")]
