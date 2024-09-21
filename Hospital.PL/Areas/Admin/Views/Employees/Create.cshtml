@@ -1,0 +1,72 @@
+﻿@model Hospital.PL.Areas.Admin.Models.ApplicationUserVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ApplicationUserVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LName" class="control-label"></label>
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" asp-for="Role">Role Name</label>
+                <select class="form-control overflow-scroll" asp-items="@ViewBag.Roles" asp-for="Role">
+                    <option value="Role"></option>
+                </select>
+            </div>
+            @{
+                if (Model.Role == "Doctor")
+                {
+                    <div class="form-group">
+                        <label asp-for="Specialization_ID" class="control-label">Specialization Name</label>
+                        <select class="form-control overflow-scroll" asp-items="@ViewBag.Specializations" asp-for="Specialization_ID">
+                            <option value="Specialization_ID"></option>
+                        </select>
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <label class="col-form-label" asp-for="Department_ID">Department Name</label>
+                <select class="form-control overflow-scroll" asp-items="@ViewBag.Departments" asp-for="Department_ID">
+                    <option value="Department_ID"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

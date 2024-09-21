@@ -45,9 +45,16 @@ namespace Hospital.PL.Areas.Admin.Controllers
         {
             var departments = await _unitOfWork.GenerateGenericRepo<Department>().GetAllAsync();
             var roles = await _roleManager.Roles.ToListAsync();
-
-            var FilteredUsers = await _userServices.getAllUsersByRole(param.roleName, param.departmentId,param.Search,int skip,int take);
-            var allUsers = await _userServices.getAllUsersByRole(roleName : param.roleName);
+            var empParams = new EmpsParams
+            {
+                roleName = param.roleName,
+                departmentId = param.departmentId,
+                Search = param.Search,
+            };
+            empParams.ApplyPagenation((param.pageNumber - 1) * param.PageSize, param.PageSize);
+            var FilteredUsers = await _userServices.getAllUsersByRole(empParams);
+            empParams.isPagenationOn = false;
+            var allUsers = await _userServices.getAllUsersByRole(empParams);
             var count = allUsers.Count();
             //var users = await _userManager.Users.ToListAsync();
             var mappedEmps = mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserVM>>(FilteredUsers);
@@ -81,6 +88,31 @@ namespace Hospital.PL.Areas.Admin.Controllers
             var mappedEmp = mapper.Map<ApplicationUser, ApplicationUserVM>(emp);
             mappedEmp.Role = currentRole.FirstOrDefault();
             return View(viewName, mappedEmp);
+        }
+        [Route("Create")]
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var departments = await _unitOfWork.GenerateGenericRepo<Department>().GetAllAsync();
+            var Specializations = await _unitOfWork.GenerateGenericRepo<Specialization>().GetAllAsync();
+
+            var roles = await _roleManager.Roles.ToListAsync();
+            ViewBag.Roles = new SelectList(roles, "Name", "Name");
+            ViewBag.Departments = new SelectList(departments, "Id", "Department_Name");
+            ViewBag.Specializations = new SelectList(Specializations, "Id", "Name");
+            return View();
+        }
+        [Route("Create")]
+        [HttpPost]
+        public async Task<IActionResult> Create(ApplicationUserVM empVm)
+        {
+            if(empVm.FName.Length < 0 || 
+                empVm.FName.Length < 0 ||
+                empVm.Role == null ||
+                empVm.Department == null
+                ) return View(empVm);
+            await _userServices.CreateUser(empVm);
+            return RedirectToAction(nameof(Index));
         }
         [Route("Edit")]
         [HttpGet]

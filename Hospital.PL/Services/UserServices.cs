@@ -2,6 +2,7 @@
 using Hospital.DAL.Context;
 using Hospital.DAL.Entites;
 using Hospital.PL.Areas.Admin.Models;
+using Hospital.PL.Helpers;
 using Hospital.PL.Utlities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,20 +28,20 @@ namespace Hospital.PL.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<ApplicationUser>> getAllUsersByRole(string roleName, int? departmentId = null, string? searchTerms = null)
+        public async Task<IEnumerable<ApplicationUser>> getAllUsersByRole(EmpsParams param)
         {
 
             var roles = await _roleManager.Roles.ToListAsync();
             var usersWithIncludes = new List<ApplicationUser>();
-            if (!string.IsNullOrEmpty(roleName))
+            if (!string.IsNullOrEmpty(param.roleName))
             {
-                if (!await _roleManager.RoleExistsAsync(roleName))
+                if (!await _roleManager.RoleExistsAsync(param.roleName))
                 {
                     return new List<ApplicationUser>();
                 }
 
                 // Get users in the role using UserManager
-                var usersInRole = (await _userManager.GetUsersInRoleAsync(roleName)).ToList();
+                var usersInRole = (await _userManager.GetUsersInRoleAsync(param.roleName)).ToList();
 
                 // Load related entities like Room, Pharmacy, Department, and Specialization using DbContext
                 usersWithIncludes = await _dbContext.Users
@@ -51,18 +52,20 @@ namespace Hospital.PL.Services
                     .Include(u => u.Specialization)        // Including Specialization
                     .ToListAsync();
 
+
                 // Apply filtering by Department_Id if provided
-                if (departmentId.HasValue)
+                if (param.departmentId.HasValue)
                 {
-                    usersInRole = usersWithIncludes.Where(u => u.Department_ID == departmentId.Value).ToList();
+                    usersWithIncludes = usersWithIncludes.Where(u => u.Department_ID == param.departmentId.Value).ToList();
                 }
 
-                if (!string.IsNullOrEmpty(searchTerms))
+                if (!string.IsNullOrEmpty(param.Search))
                 {
-                    usersInRole = usersWithIncludes.Where(u =>
-                    (u.FName != null && u.FName.ToLower().Contains(searchTerms.ToLower())) ||
-                    (u.LName != null && u.LName.ToLower().Contains(searchTerms.ToLower()))).ToList();
+                    usersWithIncludes = usersWithIncludes.Where(u =>
+                    (u.FName != null && u.FName.ToLower().Contains(param.Search.ToLower())) ||
+                    (u.LName != null && u.LName.ToLower().Contains(param.Search.ToLower()))).ToList();
                 }
+                if(param.isPagenationOn.Value) usersWithIncludes = usersWithIncludes.Skip(param.Skip).Take(param.Take).ToList();
             }
             return usersWithIncludes;
         }
