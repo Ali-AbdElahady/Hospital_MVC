@@ -9,7 +9,7 @@ namespace Hospital.BLL.Interfaces
 {
     public interface IUnitOfWork : IAsyncDisposable
     {
-        IGenericRepository<T> GenerateGenericRepo<T>() where T : BaseEntity;
+        IGenericRepository<T> GenerateGenericRepo<T>() where T : class;
         Task<int> CompleteAsync();
     }
 }

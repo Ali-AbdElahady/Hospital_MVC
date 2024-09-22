@@ -26,7 +26,7 @@ namespace Hospital.BLL.Repositories
 
         public async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();
 
-        public IGenericRepository<T> GenerateGenericRepo<T>() where T : BaseEntity
+        public IGenericRepository<T> GenerateGenericRepo<T>() where T : class
         {
             var type = typeof(T).Name; 
             if (!_repositorys.ContainsKey(type))

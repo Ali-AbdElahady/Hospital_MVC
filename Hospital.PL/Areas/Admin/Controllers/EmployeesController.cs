@@ -106,10 +106,10 @@ namespace Hospital.PL.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ApplicationUserVM empVm)
         {
-            if(empVm.FName.Length < 0 || 
-                empVm.FName.Length < 0 ||
-                empVm.Role == null ||
-                empVm.Department == null
+            if(String.IsNullOrWhiteSpace(empVm.FName) ||
+                String.IsNullOrWhiteSpace(empVm.LName) ||
+                String.IsNullOrWhiteSpace(empVm.Role) ||
+                empVm.Department == null || !String.IsNullOrEmpty(empVm.Id)
                 ) return View(empVm);
             await _userServices.CreateUser(empVm);
             return RedirectToAction(nameof(Index));

@@ -1,0 +1,48 @@
+﻿@model Hospital.PL.Helpers.PagedReuslt<Hospital.DAL.Entites.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Doctor
+            </th>
+            <th>
+                Patient
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Data) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => $"{item.Doctor.FName} {item.Doctor.LName}")
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => $"{item.Patient.FName} {item.Patient.LName}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID  }) |
+                    @Html.ActionLink("Details", "Details", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
