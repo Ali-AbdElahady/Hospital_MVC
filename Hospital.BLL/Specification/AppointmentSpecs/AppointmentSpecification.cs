@@ -11,12 +11,14 @@ namespace Hospital.BLL.Specification.AppointmentSpecs
     public class AppointmentSpecification : BaseSpecification<Appointment>
     {
         public AppointmentSpecification(AppointmentSpecParams Params):base(A=> 
-        (!String.IsNullOrWhiteSpace(Params.doctorId) || A.Doctor_ID == Params.doctorId) &&
-        (!String.IsNullOrWhiteSpace(Params.PatientId) || A.Patient_ID == Params.PatientId)
+        (!String.IsNullOrWhiteSpace(Params.doctorId) || A.DoctorID == Params.doctorId) &&
+        (!String.IsNullOrWhiteSpace(Params.PatientId) || A.PatientId == Params.PatientId)
         )
         {
             AddIncludes(D => D.Patient);
             AddIncludes(D => D.Doctor);
+            AddIncludes(D => D.Hospital);
+            AddIncludes(D => D.Department);
 
             if (!string.IsNullOrEmpty(Params.Sort))
             {
@@ -37,10 +39,12 @@ namespace Hospital.BLL.Specification.AppointmentSpecs
 
             ApplyPagination((Params.pageNumber - 1) * Params.PageSize, Params.PageSize);
         }
-        public AppointmentSpecification(string DoctorId,string PatientId) : base(A =>A.Doctor_ID == DoctorId  && A.Patient_ID == PatientId)
+        public AppointmentSpecification(string DoctorId,string PatientId) : base(A =>A.DoctorID == DoctorId  && A.PatientId == PatientId)
         {
             AddIncludes(D => D.Patient);
             AddIncludes(D => D.Doctor);
+            AddIncludes(D => D.Hospital);
+            AddIncludes(D => D.Department);
         }
     }
 }

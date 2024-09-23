@@ -16,3 +16,39 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#doctorResults {
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#doctorResults li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#doctorResults li:hover {
+    background-color: #f1f1f1;
+}
+
+#patientResults {
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#patientResults li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#patientResults li:hover {
+    background-color: #f1f1f1;
+}

@@ -19,6 +19,16 @@ namespace Hospital.PL.Extensions
             Services.AddScoped(typeof(IUserServices), typeof(UserServices));
             Services.AddAutoMapper(typeof(MappingProfiles));
             //Services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                });
+            Services.AddControllers()
+        .AddNewtonsoftJson(options =>
+        {
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        });
 
             return Services;
         }

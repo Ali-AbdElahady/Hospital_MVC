@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Hospital.DAL.Entites.HospitalEntity>
+<div id="Apppointment_Stepper">
+    <h2>Select Hospital</h2>
+    <select id="hospitalSelect">
+        <option value="">Select Hospital</option>
+        @foreach (var hospital in Model)
+        {
+            <option value="@hospital.Id">@hospital.Hospital_Name</option>
+        }
+    </select>
+
+    <div id="departmentSection" style="display:none;">
+        <h2>Select Department</h2>
+        <select id="departmentSelect">
+            <option value="">Select Department</option>
+        </select>
+    </div>
+
+    <div id="doctorSection" style="display:none;">
+        <h2>Select Doctor</h2>
+        <select id="doctorSelect">
+            <option value="">Select Doctor</option>
+        </select>
+    </div>
+
+    <button id="submitAppointment" style="display:none;">Create Appointment</button>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

@@ -5,11 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Appointmnets List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="row justify-content-center">
+    <div class="form-group col-md-6" style="position:relative">
+        <label for="doctorSearch">Search and Select Doctor:</label>
+        <input type="text" id="doctorSearch" class="form-control" placeholder="Start typing to search..." autocomplete="off">
+        <ul id="doctorResults" class="list-group" style="display: none; position: absolute; z-index: 1000; width: 100%;">
+            <!-- Dynamic search results will appear here -->
+        </ul>
+    </div>
+    <div class="form-group col-md-6" style="position:relative">
+        <label for="patientSearch">Search and Select Patient:</label>
+        <input type="text" id="patientSearch" class="form-control" placeholder="Start typing to search..." autocomplete="off">
+        <ul id="patientResults" class="list-group" style="display: none; position: absolute; z-index: 1000; width: 100%;">
+            <!-- Dynamic search results will appear here -->
+        </ul>
+    </div>
+</div>
+<form method="post" class="row justify-content-center" asp-action="index">
+    <!-- Other form fields -->
+    <input type="hidden" id="selectedDoctorId" name="doctorId">
+    <input type="hidden" id="selectedPatientId" name="PatientId">
+    <button type="submit" class="btn btn-primary mt-3 w-25">Submit</button>
+</form>
+    
 <table class="table">
     <thead>
         <tr>
@@ -18,6 +41,12 @@
             </th>
             <th>
                 Patient
+            </th>
+            <th>
+                Hospital
+            </th>
+            <th>
+                Department
             </th>
             <th>
                 Date
@@ -29,20 +58,43 @@
 @foreach (var item in Model.Data) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => $"{item.Doctor.FName} {item.Doctor.LName}")
+                @($"{item.Doctor.FName} {item.Doctor.LName}")
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => $"{item.Patient.FName} {item.Patient.LName}")
+                @($"{item.Patient.FName} {item.Patient.LName}")
+            </td>
+            <td>
+                @($"{item.Patient.FName} {item.Hospital.Hospital_Name}")
+            </td>
+            <td>
+                @($"{item.Patient.FName} {item.Department.Department_Name}")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID  }) |
-                    @Html.ActionLink("Details", "Details", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { doctorId = item.Doctor_ID ,pattientId = item.Patient_ID  })
+                @Html.ActionLink("Edit", "Edit", new { doctorId = item.DoctorID ,pattientId = item.PatientId  }) |
+                    @Html.ActionLink("Details", "Details", new { doctorId = item.DoctorID ,pattientId = item.PatientId }) |
+                    @Html.ActionLink("Delete", "Delete", new { doctorId = item.DoctorID ,pattientId = item.PatientId  })
             </td>
         </tr>
 }
     </tbody>
 </table>
+<div>
+
+
+    <cs-pager cs-paging-pagesize="@Model.PageSize"
+              cs-paging-pagenumber="@Model.PageNumber"
+              cs-paging-totalitems="@Model.TotalItems"
+              cs-pagenumber-param="pageNumber"
+              asp-controller="Appointmnets"
+              asp-action="Index"
+              cs-pager-li-current-class="page-item active"
+              cs-pager-li-other-class="page-item"
+              cs-pager-li-non-active-class="page-item disabled"
+              cs-pager-link-current-class="page-link"
+              cs-pager-link-other-class="page-link">
+
+    </cs-pager>
+</div>
