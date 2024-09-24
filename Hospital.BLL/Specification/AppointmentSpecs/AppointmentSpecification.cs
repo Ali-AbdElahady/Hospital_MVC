@@ -11,8 +11,8 @@ namespace Hospital.BLL.Specification.AppointmentSpecs
     public class AppointmentSpecification : BaseSpecification<Appointment>
     {
         public AppointmentSpecification(AppointmentSpecParams Params):base(A=> 
-        (!String.IsNullOrWhiteSpace(Params.doctorId) || A.DoctorID == Params.doctorId) &&
-        (!String.IsNullOrWhiteSpace(Params.PatientId) || A.PatientId == Params.PatientId)
+        (String.IsNullOrWhiteSpace(Params.doctorId) || A.DoctorID == Params.doctorId) &&
+        (String.IsNullOrWhiteSpace(Params.PatientId) || A.PatientId == Params.PatientId)
         )
         {
             AddIncludes(D => D.Patient);

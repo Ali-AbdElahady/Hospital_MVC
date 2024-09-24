@@ -109,16 +109,17 @@ namespace Hospital.PL.Areas.Admin.Controllers
         }
 
         // Step 4: Create Appointment
+        [Route("CreateAppointment")]
         [HttpPost]
-        public IActionResult CreateAppointment(Appointment appointment)
+        public async Task<IActionResult> CreateAppointment(Appointment appointment)
         {
-            if (ModelState.IsValid)
-            {
-                //_context.Appointments.Add(appointment);
-                //_context.SaveChanges();
-                return RedirectToAction("Index"); // Redirect to a confirmation page or index
-            }
-            return View(appointment);
+                await _unitOfWork.GenerateGenericRepo<Appointment>().AddAsync(appointment);
+                await _unitOfWork.CompleteAsync();
+            //_context.Appointments.Add(appointment);
+            //_context.SaveChanges();
+            return RedirectToAction(nameof(Index)); // Redirect to a confirmation page or index
+            
+            //return View(appointment);
         }
     }
 }
