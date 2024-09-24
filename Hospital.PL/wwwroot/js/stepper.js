@@ -102,23 +102,37 @@ $('#Apppointment_Stepper #appointmentDate').change(function () {
         $('#Apppointment_Stepper #patientSection').hide();
     }
 });
-$('#Apppointment_Stepper #submitAppointment').click(function () {
-    const doctorID = $('#Apppointment_Stepper #doctorSelect').val();
-    const departmentId = $('#Apppointment_Stepper #departmentSelect').val();
-    const hospitalId = $('#Apppointment_Stepper #hospitalSelect').val();
-    const patientId = $('#Apppointment_Stepper #selectedPatientId').val();
-    const date = $('#Apppointment_Stepper #appointmentDate').val();
-    if (!doctorID || !departmentId || !hospitalId || !patientId || !date) return alert("Please fill all filleds")
-    var appointment = {
-        DoctorID: doctorID,
-        DepartmentId: departmentId,
-        HospitalId: hospitalId,
-        PatientId: patientId,
-        Date: date,
-        // Add more fields as necessary (e.g., PatientId, Date)
-    };
+//$('#Apppointment_Stepper #submitAppointment').click(function () {
+//    const doctorID = $('#Apppointment_Stepper #doctorSelect').val();
+//    const departmentId = $('#Apppointment_Stepper #departmentSelect').val();
+//    const hospitalId = $('#Apppointment_Stepper #hospitalSelect').val();
+//    const patientId = $('#Apppointment_Stepper #selectedPatientId').val();
+//    const date = $('#Apppointment_Stepper #appointmentDate').val();
+//    if (!doctorID || !departmentId || !hospitalId || !patientId || !date) return alert("Please fill all filleds")
+//    var appointment = {
+//        DoctorID: doctorID,
+//        DepartmentId: departmentId,
+//        HospitalId: hospitalId,
+//        PatientId: patientId,
+//        Date: date,
+//        // Add more fields as necessary (e.g., PatientId, Date)
+//    };
 
-    $.post('CreateAppointment', appointment, function (response) {
-        // Handle success (e.g., redirect or show message)
+//    $.post('Create', appointment, function (response) {
+//        // Handle success (e.g., redirect or show message)
+//    });
+//});
+$(document).ready(function () {
+    $('#Apppointment_Stepper form').submit(function (event) {
+        const doctorID = $('#doctorSelect').val();
+        const departmentId = $('#departmentSelect').val();
+        const hospitalId = $('#hospitalSelect').val();
+        const patientId = $('#selectedPatientId').val();
+        const date = $('#appointmentDate').val();
+
+        if (!doctorID || !departmentId || !hospitalId || !patientId || !date) {
+            alert("Please fill all fields");
+            event.preventDefault(); // يمنع إرسال الـ form
+        }
     });
 });

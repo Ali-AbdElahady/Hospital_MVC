@@ -28,21 +28,25 @@ namespace Hospital.PL.Areas.Admin.Controllers
         [Route("index")]
         public async Task<IActionResult> Index(AppointmentSpecParams Params)
         {
+            
             ViewBag.Patients = await _userManager.GetUsersInRoleAsync(WebSiteRoles.WebSite_Patient);
             ViewBag.Doctors = await _userManager.GetUsersInRoleAsync(WebSiteRoles.WebSite_Doctor);
+
             var spec = new AppointmentSpecification(Params);
             var Appointments = await _unitOfWork.GenerateGenericRepo<Appointment>().GetAllWithSpecAsync(spec);
             var CountSpec = new AppointmnetWithFilterationForCountAsync(Params);
             var Count = await _unitOfWork.GenerateGenericRepo<Appointment>().GetCountWithSpecAsync(CountSpec);
+
             var pageData = new Helpers.PagedReuslt<Appointment>
             {
                 Data = Appointments,
                 PageSize = Params.PageSize,
                 TotalItems = Count,
                 PageNumber = Params.pageNumber
-
             };
-            return View(pageData);
+
+            return View(nameof(Index), pageData);
+            
         }
         
 
@@ -79,6 +83,7 @@ namespace Hospital.PL.Areas.Admin.Controllers
 
         // Step 1: Select Hospital
         [Route("Create")]
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             var hospitals = await _unitOfWork.GenerateGenericRepo<HospitalEntity>().GetAllAsync();
@@ -109,17 +114,14 @@ namespace Hospital.PL.Areas.Admin.Controllers
         }
 
         // Step 4: Create Appointment
-        [Route("CreateAppointment")]
+        [Route("Create")]
         [HttpPost]
-        public async Task<IActionResult> CreateAppointment(Appointment appointment)
+        public async Task<IActionResult> Create(Appointment appointment)
         {
-                await _unitOfWork.GenerateGenericRepo<Appointment>().AddAsync(appointment);
-                await _unitOfWork.CompleteAsync();
-            //_context.Appointments.Add(appointment);
-            //_context.SaveChanges();
-            return RedirectToAction(nameof(Index)); // Redirect to a confirmation page or index
-            
-            //return View(appointment);
+            await _unitOfWork.GenerateGenericRepo<Appointment>().AddAsync(appointment);
+            await _unitOfWork.CompleteAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
