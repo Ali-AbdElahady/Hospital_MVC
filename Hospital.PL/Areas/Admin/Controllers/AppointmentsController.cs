@@ -5,6 +5,7 @@ using Hospital.BLL.Specification.AppointmentSpecs;
 using Hospital.BLL.Specification.DepartmentSpecs;
 using Hospital.DAL.Entites;
 using Hospital.PL.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

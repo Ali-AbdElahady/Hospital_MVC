@@ -70,7 +70,7 @@
                 @($"{item.Patient.FName} {item.Department.Department_Name}")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                    @($"{item.Date.ToString("dd/MM/yyyy")}")
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { doctorId = item.DoctorID ,pattientId = item.PatientId  }) |
